@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tournament.Api", "Tournament\Tournament.Api.csproj", "{8CCE143C-85C4-4A87-B7D8-2481E588356C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8CCE143C-85C4-4A87-B7D8-2481E588356C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CCE143C-85C4-4A87-B7D8-2481E588356C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CCE143C-85C4-4A87-B7D8-2481E588356C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CCE143C-85C4-4A87-B7D8-2481E588356C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5BAB83A1-17D7-4A6D-8974-223E7FCA193C}
+	EndGlobalSection
+EndGlobal

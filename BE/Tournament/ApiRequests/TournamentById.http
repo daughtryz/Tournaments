@@ -1,0 +1,6 @@
+@Tournament_HostAddress = http://localhost:5294
+
+GET {{Tournament_HostAddress}}/tournaments/4AD198A2-E09F-4DE1-8C34-D67248B79807
+Accept: application/json
+
+###

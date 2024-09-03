@@ -1,0 +1,14 @@
+@Tournament_HostAddress = http://localhost:5294
+
+POST {{Tournament_HostAddress}}/tournaments/
+Content-Type: application/json
+
+{
+    "name": "League of legends tournament",
+    "description": "New LOL tournament",
+    "startDate": "2024-06-24",
+    "endDate": "2024-06-25",
+    "teamsInvolved": 10,
+    "organizer": "Riot Games"
+}
+###

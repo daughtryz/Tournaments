@@ -1,0 +1,10 @@
+@Tournament_HostAddress = http://localhost:5294
+
+POST {{Tournament_HostAddress}}/auth/login
+Content-Type: application/json
+
+{
+    "userName": "iliev35",
+    "password": "Bedo35_"
+}
+###
