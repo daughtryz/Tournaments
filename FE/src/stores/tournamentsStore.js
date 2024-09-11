@@ -50,7 +50,8 @@ export const useTournamentStore = defineStore('tournamentsStore', {
         deleteTournament(id) {
             api.delete(`/tournaments/${id}`, { headers })
                 .then((response) => {
-                    this.router.push({ name: 'MainPage' })
+                    const currentTournamentIndex = this.tournaments.findIndex(x => x.id === id)
+                    this.tournaments.splice(currentTournamentIndex, 1)
                 })
                 .catch((ex) => {
                     console.log(ex);

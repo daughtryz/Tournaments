@@ -33,15 +33,19 @@
     <q-card-actions align="right">
       <q-btn lass="glossy" round color="primary" icon="info" @click="viewDetails"></q-btn>
       <q-btn class="glossy" round color="secondary" icon="edit" @click="editPage" />
-      <q-btn class="glossy" round color="deep-orange" icon="delete" @click="deleteTournament" />
+
+      <q-btn @click="modals.deleteTournament = !modals.deleteTournament" class="glossy" round color="deep-orange"
+        icon="delete" />
+      <DeleteTournamentModal :id="tournament.id" v-if="modals.deleteTournament" v-model="modals.deleteTournament" />
     </q-card-actions>
   </q-card>
 </template>
 
 <script setup>
 import { useRouter } from 'vue-router'
-import { computed } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import { useTournamentStore } from 'src/stores/tournamentsStore';
+import DeleteTournamentModal from './DeleteTournamentModal.vue';
 
 defineOptions({
   name: 'TournamentList'
@@ -49,6 +53,9 @@ defineOptions({
 
 const tournamentStore = useTournamentStore()
 const router = useRouter();
+const modals = reactive({
+  deleteTournament: false
+})
 
 const isExpired = computed(() => {
   return Date.now() <= props.tournament.endDate ? 'Active' : 'Expired'
