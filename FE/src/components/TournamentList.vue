@@ -60,7 +60,7 @@ const editPage = () => {
 }
 
 const viewDetails = () => {
-  const id = props.id;
+  const id = props.tournament.id;
   router.push({ name: 'TournamentDetailsPage', params: { id } })
 }
 

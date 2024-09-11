@@ -1,6 +1,6 @@
 <template>
     <TournamentById
-    v-bind="tournament" />
+    :tournament="tournament" />
 </template>
   
   <script setup>
