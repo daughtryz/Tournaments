@@ -7,46 +7,24 @@
     </q-btn>
     <div class="q-pa-md">
       <q-list>
-        <q-item-label
-          header
-        >
+        <q-item-label header>
           Tournaments
         </q-item-label>
-          <TournamentList
-              v-for="tournament in data"
-              :key="tournament.name"
-              v-bind="tournament"
-          />
+        <TournamentList v-for="tournament in tournamentStore.tournaments" :key="tournament.name"
+          :tournament="tournament" />
       </q-list>
-  </div>
+    </div>
   </q-page>
 </template>
 
 <script setup>
-
-import { ref, onMounted } from 'vue'
-import axios, { api } from 'boot/axios'
-import { useQuasar } from 'quasar'
-import { useRouter } from 'vue-router'
 import TournamentList from 'components/TournamentList.vue'
+import { useTournamentStore } from 'src/stores/tournamentsStore';
+import { onMounted } from 'vue';
 
-const $q = useQuasar()
+const tournamentStore = useTournamentStore()
 
-  const data = ref()
-  const router = useRouter();
-
-  onMounted(() => {
-    console.log('In the mount')
-    console.log(axios);
-      api.get('/tournaments')
-      .then((response) => {
-        data.value = response.data
-        console.log(response.data.status)
-      })
-      .catch((ex) => {
-        router.push({ name: 'MainPage' })
-        console.log(ex)
-      })
+onMounted(() => {
+  tournamentStore.init()
 })
-
 </script>

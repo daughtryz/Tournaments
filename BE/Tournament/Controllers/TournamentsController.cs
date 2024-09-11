@@ -34,11 +34,16 @@ namespace Tournament.Api.Controllers
             return Ok(tournaments);
         }
 
-        // GET api/<TournamentsController>/5
+        // GET api/<TournamentsController>/5]
         [HttpGet("{id}", Name = "GetTournamentById")]
         public async Task<IActionResult> GetTournamentById([FromRoute] Guid id)
         {
             var tournament = await _tournamentsDbContext.Tournaments.FindAsync(id);
+
+            if(tournament is null)
+            {
+                return NotFound();
+            }
 
             return Ok(tournament);
         }
