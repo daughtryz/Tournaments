@@ -1,11 +1,11 @@
 <template>
-  <div class="q-pa-md" style="max-width: 400px">
+  <div class="q-pa-md" style="display: flex; justify-content: center;">
     <!-- Loading Screen -->
     <!-- <div v-if="loading.value" class="loading-overlay">
       <q-circular-progress indeterminate rounded size="200px" :thickness="0.2" color="lime" class="q-ma-md" />
     </div> -->
 
-    <q-form @submit="onSubmit" class="q-gutter-md">
+    <q-form class="q-gutter-md" @submit="onSubmit">
       <q-input filled v-model="tournament.name" type="text" label="Tournament name" hint="Tournament name" lazy-rules
         :rules="[val => val && val.length > 0 || 'Please type something']" />
 
@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { onMounted, onUnmounted, reactive, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useTournamentStore } from 'src/stores/tournamentsStore';
 

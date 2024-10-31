@@ -1,7 +1,7 @@
 <template>
-  <q-card class="col-xs-12 col-sm-6 col-md-4 col-lg-3 q-mb-md">
+  <q-card class="full-height">
     <q-card-section class="bg-primary text-white">
-      <div class="text-h6">Tournament: {{ tournament.name }}</div>
+      <div class="text-h6 ellipsis">Tournament: {{ tournament.name }}</div>
     </q-card-section>
     <q-separator />
 
@@ -29,8 +29,7 @@
     </q-card-section>
 
     <q-separator />
-
-    <q-card-actions align="right">
+    <q-card-actions align="right" class="q-pt-none q-mt-auto">
       <q-btn lass="glossy" round color="primary" icon="info" @click="viewDetails"></q-btn>
       <q-btn class="glossy" round color="secondary" icon="edit" @click="editPage" />
 
@@ -43,15 +42,13 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
-import { computed, reactive, ref } from 'vue'
-import { useTournamentStore } from 'src/stores/tournamentsStore';
+import { computed, reactive } from 'vue'
 import DeleteTournamentModal from './DeleteTournamentModal.vue';
 
 defineOptions({
   name: 'TournamentList'
 })
 
-const tournamentStore = useTournamentStore()
 const router = useRouter();
 const modals = reactive({
   deleteTournament: false
@@ -71,11 +68,6 @@ const viewDetails = () => {
   router.push({ name: 'TournamentDetailsPage', params: { id } })
 }
 
-const deleteTournament = () => {
-  const id = props.tournament.id;
-  tournamentStore.deleteTournament(id)
-}
-
 const props = defineProps({
   tournament: {
     type: Object,
@@ -83,3 +75,23 @@ const props = defineProps({
   }
 })
 </script>
+
+<style scoped>
+.full-height {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 250px;
+  /* Set a minimum height to ensure uniformity */
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.q-card-section {
+  flex-grow: 1;
+}
+</style>

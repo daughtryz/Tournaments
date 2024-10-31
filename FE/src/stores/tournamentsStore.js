@@ -2,9 +2,6 @@ import { defineStore } from 'pinia'
 import { api } from 'src/axios'
 import { useAuthStore } from './authStore'
 
-const authStore = useAuthStore()
-const headers = { 'Authorization': `Bearer ${authStore.user.accessToken}` };
-
 export const useTournamentStore = defineStore('tournamentsStore', {
     state() {
         return {
@@ -13,7 +10,8 @@ export const useTournamentStore = defineStore('tournamentsStore', {
     },
     actions: {
         getTournaments() {
-            console.log(authStore.user.accessToken)
+            const authStore = useAuthStore()
+            const headers = { 'Authorization': `Bearer ${authStore.user.accessToken}` };
             api.get('/tournaments', { headers })
                 .then((response) => {
                     this.tournaments = response.data
@@ -30,6 +28,8 @@ export const useTournamentStore = defineStore('tournamentsStore', {
             return result
         },
         editTournament(id, body) {
+            const authStore = useAuthStore()
+            const headers = { 'Authorization': `Bearer ${authStore.user.accessToken}` };
             api.put(`/tournaments/${id}`, body, { headers })
                 .then((response) => {
                     this.router.push({ name: 'TournamentPage' })
@@ -39,6 +39,8 @@ export const useTournamentStore = defineStore('tournamentsStore', {
                 })
         },
         createTournament(tournament) {
+            const authStore = useAuthStore()
+            const headers = { 'Authorization': `Bearer ${authStore.user.accessToken}` };
             api.post('/tournaments', tournament, { headers })
                 .then((response) => {
                     this.router.push({ name: 'TournamentPage' })
@@ -48,6 +50,8 @@ export const useTournamentStore = defineStore('tournamentsStore', {
                 })
         },
         deleteTournament(id) {
+            const authStore = useAuthStore()
+            const headers = { 'Authorization': `Bearer ${authStore.user.accessToken}` };
             api.delete(`/tournaments/${id}`, { headers })
                 .then((response) => {
                     const currentTournamentIndex = this.tournaments.findIndex(x => x.id === id)

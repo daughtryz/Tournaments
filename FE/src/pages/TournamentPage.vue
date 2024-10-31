@@ -10,8 +10,10 @@
         <q-item-label header>
           Tournaments
         </q-item-label>
-        <TournamentList v-for="tournament in tournamentStore.tournaments" :key="tournament.name"
-          :tournament="tournament" />
+        <div class="q-pa-md row items-start q-gutter-md">
+          <TournamentList v-for="tournament in tournamentStore.tournaments" :key="tournament.name"
+            :tournament="tournament" />
+        </div>
       </q-list>
     </div>
   </q-page>
