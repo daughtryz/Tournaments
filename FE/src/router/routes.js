@@ -18,7 +18,9 @@ const routes = [
       },
       { path: 'tournaments/edit/:id', name: 'TournamentEditPage', component: () => import('pages/TournamentEditPage.vue') },
       { path: 'register', name: 'RegisterPage', component: () => import('pages/users/RegisterPage.vue') },
-      { path: 'login', name: 'LoginPage', component: () => import('pages/users/LoginPage.vue') }
+      { path: 'login', name: 'LoginPage', component: () => import('pages/users/LoginPage.vue') },
+      { path: 'teams', name: 'TeamPage', component: () => import('pages/teams/TeamsPage.vue') },
+      { path: '/notauthorized', name: 'NotAuhorized', component: () => import('pages/NotAuthorized.vue'), },
     ]
   },
 

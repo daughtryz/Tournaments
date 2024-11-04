@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { api } from 'src/axios'
-import { useAuthStore } from './authStore'
 
 export const useTournamentStore = defineStore('tournamentsStore', {
     state() {
@@ -10,15 +9,15 @@ export const useTournamentStore = defineStore('tournamentsStore', {
     },
     actions: {
         getTournaments() {
-            const authStore = useAuthStore()
-            const headers = { 'Authorization': `Bearer ${authStore.user.accessToken}` };
-            api.get('/tournaments', { headers })
+            api.get('/tournaments')
                 .then((response) => {
+                    console.log(response)
                     this.tournaments = response.data
                 })
                 .catch((ex) => {
-                    this.router.push({ name: 'MainPage' })
-                    console.log(ex)
+                    if (ex.response.status == 401) {
+                        this.router.push({ name: 'NotAuhorized' })
+                    }
                 })
         },
         getTournamentById(tournamentId) {
@@ -28,9 +27,7 @@ export const useTournamentStore = defineStore('tournamentsStore', {
             return result
         },
         editTournament(id, body) {
-            const authStore = useAuthStore()
-            const headers = { 'Authorization': `Bearer ${authStore.user.accessToken}` };
-            api.put(`/tournaments/${id}`, body, { headers })
+            api.put(`/tournaments/${id}`, body)
                 .then((response) => {
                     this.router.push({ name: 'TournamentPage' })
                 })
@@ -39,9 +36,7 @@ export const useTournamentStore = defineStore('tournamentsStore', {
                 })
         },
         createTournament(tournament) {
-            const authStore = useAuthStore()
-            const headers = { 'Authorization': `Bearer ${authStore.user.accessToken}` };
-            api.post('/tournaments', tournament, { headers })
+            api.post('/tournaments', tournament)
                 .then((response) => {
                     this.router.push({ name: 'TournamentPage' })
                 })
@@ -50,8 +45,6 @@ export const useTournamentStore = defineStore('tournamentsStore', {
                 })
         },
         deleteTournament(id) {
-            const authStore = useAuthStore()
-            const headers = { 'Authorization': `Bearer ${authStore.user.accessToken}` };
             api.delete(`/tournaments/${id}`, { headers })
                 .then((response) => {
                     const currentTournamentIndex = this.tournaments.findIndex(x => x.id === id)

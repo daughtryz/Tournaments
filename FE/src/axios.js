@@ -1,20 +1,17 @@
 import { boot } from 'quasar/wrappers'
 import axios from 'axios'
-// import { useAuthStore } from 'src/stores/authStore';
+const api = axios.create({ baseURL: 'http://localhost:5294/' })
 
-// const authStore = useAuthStore()
-const api = axios.create({ baseURL: 'http://172.20.0.1:5000/' })
-
-// api.interceptors.request.use(config => {
-//   console.log(user)
-//   const token = authStore.user.accessToken;
-//   if (token) {
-//     config.headers.Authorization = `Bearer ${token}`;
-//   }
-//   return config;
-// }, error => {
-//   return Promise.reject(error);
-// });
+api.interceptors.request.use(config => {
+    const token = localStorage.getItem('user')
+    if (token) {
+        console.log(token)
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+}, error => {
+    return Promise.reject(error);
+});
 
 // export default boot(({ app }) => {
 //   // for use inside Vue files (Options API) through this.$axios and this.$api

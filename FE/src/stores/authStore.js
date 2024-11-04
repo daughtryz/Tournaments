@@ -6,7 +6,7 @@ export const useAuthStore = defineStore('auth', {
     return {
       user: {
         loggedIn: false,
-        accessToken: localStorage.getItem('user')
+        accessToken: localStorage.getItem('user') ?? null
       }
     }
   },
@@ -16,12 +16,15 @@ export const useAuthStore = defineStore('auth', {
         username: username,
         password: password
       }).then((response) => {
-        this.user.accessToken = response.data.access_token
-        this.user.username = response.data.username
-        localStorage.setItem('user', response.data.access_token)
-        localStorage.setItem('expires_at', response.data.expires_at)
-        this.user.loggedIn = true
-        this.router.push({ name: 'MainPage' })
+        console.log(response)
+        if (!this.user.accessToken) {
+          this.user.accessToken = response.data.access_token
+          this.user.username = response.data.username
+          localStorage.setItem('user', response.data.access_token)
+          localStorage.setItem('expires_at', response.data.expires_at)
+          this.user.loggedIn = true
+          this.router.push({ name: 'MainPage' })
+        }
       })
         .catch((ex) => {
           console.log(ex);
